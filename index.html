@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>get stickbugged lol</title>
+  <title>STICKBUG</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
@@ -63,17 +63,27 @@
 
   <img src="stickbug.gif" alt="Get stick bugged lol">
 
-  <audio id="music" autoplay loop>
-    <source src="stickbug.mp3" type="audio/mpeg">
-  </audio>
+<audio id="music" autoplay loop preload="auto">
+  <source src="./stickbug.mp3" type="audio/mpeg">
+</audio>
 
-  <script>
-    const music = document.getElementById("music");
-    music.volume = 0.5;
+<script>
+  const music = document.getElementById("music");
+  music.volume = 0.5;
 
-    music.play().catch(() => {
-      // Autoplay may be blocked by the browser.
-    });
-  </script>
+  function startMusic() {
+    music.play()
+      .then(() => {
+        document.removeEventListener("click", startMusic);
+        document.removeEventListener("keydown", startMusic);
+      })
+      .catch(error => {
+        console.error("Müzik başlatılamadı:", error);
+      });
+  }
+
+  document.addEventListener("click", startMusic);
+  document.addEventListener("keydown", startMusic);
+</script>
 </body>
 </html>
